@@ -190,8 +190,25 @@ class MySGMLParser (SGMLParser):
 ##        print 'end pfams'
         drugbankData._stack_of_tags.pop_until('pfams')
         drugbankData._current_text = ''                
-        drugbankData._in_pfams = False                
-        
+        drugbankData._in_pfams = False
+
+    def start_description(self, attributes):
+        global drugbankData, drugbankEntity
+        d=dict(attributes)
+##        print 'start_name', d, valid_name()
+        if valid_name():
+            drugbankData._stack_of_tags.push('description')
+            drugbankData._current_text = ''
+
+
+    def end_description(self):
+        global drugbankData, drugbankEntity
+##        print 'end pfams'
+        drugbankData._stack_of_tags.pop_until('description')
+        drugbankData._current_text = drugbankData._current_text.replace('\n','').strip()
+
+        drugbankEntity.name = drugbankData._current_text
+        drugbankData._current_text = ''
             
 
 class STACK:
@@ -260,11 +277,13 @@ class DRUGBANKENTITY:
         self.id=id
         self.idS = set([])
         self.name=''
+        self.description=''
 
     def _describe(self,verbose=False):
         print 'DRUGBANKENTITY primary id', self.id
         print 'not primary idS', self.idS
         print 'name', self.name
+        print 'description', self.description
 
 
 
