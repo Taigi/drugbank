@@ -1,5 +1,3 @@
-
-
 # -*- coding: utf8 -*-
 #!/pkg/ldc/bin/python2.5
 #-----------------------------------------------------------------------------
@@ -16,22 +14,21 @@ import sys
 
 
 ##user='horacioCluster'
-user='horacioLocal'
-if user == 'horacioCluster':
-    dirDRUGBANK = '/home/usuaris/horacio/corpora/drugbank/'
-elif user == 'horacioLocal':
-    dirDRUGBANK = 'C:/Users/horacio/Desktop/docencia/dmkm/data/'
-else:
-    print 'unknown user'
+#user='horacioLocal'
+# if user == 'horacioCluster':
+#     dirDRUGBANK = '/home/usuaris/horacio/corpora/drugbank/'
+# elif user == 'horacioLocal':
+#     dirDRUGBANK = 'C:/Users/horacio/Desktop/docencia/dmkm/data/'
+# else:
+#     print 'unknown user'
 
-  
 lang='en'
 
 ##most of these modules are in fact not needed, there are here because copy & paste
 
 import re
 from string import *
-from os import listdir,path
+from os import listdir,path, getcwd
 from os import fsync
 from os.path import split, splitext, abspath
 from sgmllib import *
@@ -50,6 +47,7 @@ from nltk import stem
 locale.setlocale(locale.LC_ALL, '')
 
 ##global
+dirDRUGBANK = getcwd() +'/'
 
 
 ##classes
