@@ -192,23 +192,23 @@ class MySGMLParser (SGMLParser):
         drugbankData._current_text = ''                
         drugbankData._in_pfams = False
 
-    def start_description(self, attributes):
-        global drugbankData, drugbankEntity
-        d=dict(attributes)
-##        print 'start_name', d, valid_name()
-        if valid_name():
-            drugbankData._stack_of_tags.push('description')
-            drugbankData._current_text = ''
-
-
-    def end_description(self):
-        global drugbankData, drugbankEntity
-##        print 'end pfams'
-        drugbankData._stack_of_tags.pop_until('description')
-        drugbankData._current_text = drugbankData._current_text.replace('\n','').strip()
-
-        drugbankEntity.name = drugbankData._current_text
-        drugbankData._current_text = ''
+#     def start_description(self, attributes):
+#         global drugbankData, drugbankEntity
+#         d=dict(attributes)
+# ##        print 'start_name', d, valid_name()
+#         if valid_name():
+#             drugbankData._stack_of_tags.push('description')
+#             drugbankData._current_text = ''
+#
+#
+#     def end_description(self):
+#         global drugbankData, drugbankEntity
+# ##        print 'end pfams'
+#         drugbankData._stack_of_tags.pop_until('description')
+#         drugbankData._current_text = drugbankData._current_text.replace('\n','').strip()
+#
+#         drugbankEntity.name = drugbankData._current_text
+#         drugbankData._current_text = ''
             
 
 class STACK:
@@ -425,7 +425,7 @@ def getDRUGBANKcorpusFromFile(inF):
         
 # main
 
-getDRUGBANKcorpusFromFile(dirDRUGBANK+'aaa.txt')
+getDRUGBANKcorpusFromFile('/home/iva/DMKM/DrugBank/'+'drugbank.xml')
 for i in drugbankData.entities:
     print i
     drugbankData.entities[i]._describe()
