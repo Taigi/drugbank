@@ -10,7 +10,7 @@ def mapDrugBankFromFile(filename):
     file = open(filename, 'r')
     tree = ET.parse(file)
     file.close()
-
+    drugs = []
     # dictionary with the namespaces
     ns = {'drugbank': 'http://www.drugbank.ca', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 
@@ -98,13 +98,32 @@ def mapDrugBankFromFile(filename):
             if propkind == 'Molecular Formula':
                 molecular_formula = prop.find('drugbank:value', ns).text
 
+        pathways_drugs = []
+        pathways_enzymes = []
+        pathwaystag = drugtag.find('drugbank:pathways', ns)
+        if pathwaystag != None:
+            for pathwaytag in pathwaystag:
+                drugstag = pathwaytag.find('drugbank:drugs', ns)
+                for drugtag in drugstag:
+                    drugid = drugtag.find('drugbank:drugbank-id', ns).text
+                    pathways_drugs.append(drugid)
+                enzymestag = pathwaytag.find('drugbank:enzymes', ns)
+                if enzymestag != None:
+                    for uniprot in enzymestag:
+                        #uniprotid = enzymetag.find('drugbank:uniprot-id', ns).text
+                        pathways_enzymes.append(uniprot.text)
+
 
         drug = Drug(primary, other_ids, name, description, indication, pharmacodynamics,
                     classification, synonyms, international_brands,
-                    categories, sequences, molecular_weight, molecular_formula)
-        drug.printout()
-        count +=1
-    print count
+                    categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes)
+        drugs.append(drug)
+
+    return drugs
+
+    #     drug.printout()
+    #     count +=1
+    # print count
 #filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
-filename = '/root/PycharmProjects/drugbank/sample.xml'
-mapDrugBankFromFile(filename)
+#filename = '/root/PycharmProjects/drugbank/sampleN.xml'
+#mapDrugBankFromFile(filename)
