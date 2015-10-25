@@ -2,6 +2,8 @@ __author__ = 'root'
 
 from drugBankAcessor_ET import  mapDrugBankFromFile
 from sampleDrugBank import sampleFirstNdrugsFromXml, sampleXlinesfromXml
+from drugBankDist import levenshtein_dist
+from Levenshtein import distance
 
 if __name__ == '__main__':
 
@@ -14,8 +16,12 @@ if __name__ == '__main__':
     # sampleFirstNdrugsFromXml(4, path, namen)
 
     #filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
-    filename = '/root/PycharmProjects/drugbank/sampleN.xml'
+    #filename = '/root/PycharmProjects/drugbank/sampleN.xml'
+    filename = '/Volumes/Local/Users/humberto/projects/drugbank/drugbank.xml'
     drugs = mapDrugBankFromFile(filename)
-    #print len(drugs)
-    for drug in drugs:
-        drug.printout()
+    print len(drugs)
+    #for key, value in drugs.iteritems():
+    #     value.printout()
+    d = levenshtein_dist(drugs)
+
+

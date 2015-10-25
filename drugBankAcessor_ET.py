@@ -10,7 +10,8 @@ def mapDrugBankFromFile(filename):
     file = open(filename, 'r')
     tree = ET.parse(file)
     file.close()
-    drugs = []
+    #drugs = []
+    drugs = {}
     # dictionary with the namespaces
     ns = {'drugbank': 'http://www.drugbank.ca', 'xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
 
@@ -27,6 +28,9 @@ def mapDrugBankFromFile(filename):
                 other_ids.append(other.text)
 
         name = drugtag.find('drugbank:name', ns).text
+        # Prints the drug names which are no strings (strange chars)
+        if (not isinstance(name, str)):
+            print 'id: ' + primary + ' name: ' + name
         description = drugtag.find('drugbank:description', ns).text
         indication = drugtag.find('drugbank:indication', ns).text
         pharmacodynamics = drugtag.find('drugbank:pharmacodynamics',ns).text
@@ -117,7 +121,9 @@ def mapDrugBankFromFile(filename):
         drug = Drug(primary, other_ids, name, description, indication, pharmacodynamics,
                     classification, synonyms, international_brands,
                     categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes)
-        drugs.append(drug)
+
+        #drugs.append(drug)
+        drugs[primary] = drug
 
     return drugs
 
