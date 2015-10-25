@@ -58,6 +58,6 @@ class Drug:
         print 'Sequences: '
         for seq in self.sequences: seq.printout()
         #print 'Molecular weight: %f' %self.molecular_weight
-        print 'Molecular weight: ' +self.molecular_weight
+        print 'Molecular weight: ' + str(self.molecular_weight)
         print 'Molecular formula: ' + self.molecular_formula
         print '\n----------------\n'
