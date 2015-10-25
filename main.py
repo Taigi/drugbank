@@ -2,7 +2,7 @@ __author__ = 'root'
 
 from drugBankAcessor_ET import  mapDrugBankFromFile
 from sampleDrugBank import sampleFirstNdrugsFromXml, sampleXlinesfromXml
-from drugBankDist import levenshtein_dist
+from drugBankDistance import levenshtein_dist
 from Levenshtein import distance
 
 if __name__ == '__main__':
