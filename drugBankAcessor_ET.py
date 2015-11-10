@@ -20,6 +20,8 @@ def mapDrugBankFromFile(filename):
     for drugtag in tree.getroot():
         ids = drugtag.findall('drugbank:drugbank-id', ns)
         primary = drugtag.find("drugbank:drugbank-id[@primary='true']", ns).text
+
+
         other_ids = []
         for other in ids:
             if other.text != primary:
@@ -107,9 +109,9 @@ def mapDrugBankFromFile(filename):
         pathwaystag = drugtag.find('drugbank:pathways', ns)
         if pathwaystag != None:
             for pathwaytag in pathwaystag:
-                drugstag = pathwaytag.find('drugbank:drugs', ns)
-                for drugtag in drugstag:
-                    drugid = drugtag.find('drugbank:drugbank-id', ns).text
+                drugstag_pw = pathwaytag.find('drugbank:drugs', ns)
+                for drugtag_pw in drugstag_pw:
+                    drugid = drugtag_pw.find('drugbank:drugbank-id', ns).text
                     pathways_drugs.append(drugid)
                 enzymestag = pathwaytag.find('drugbank:enzymes', ns)
                 if enzymestag != None:
@@ -117,10 +119,14 @@ def mapDrugBankFromFile(filename):
                         #uniprotid = enzymetag.find('drugbank:uniprot-id', ns).text
                         pathways_enzymes.append(uniprot.text)
 
+        atc_code = ''
+        atccode = drugtag.find('drugbank:atc-codes/drugbank:atc-code', ns)
+        if atccode != None:
+            atc_code = atccode.attrib["code"]
 
         drug = Drug(primary, other_ids, name, description, indication, pharmacodynamics,
                     classification, synonyms, international_brands,
-                    categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes)
+                    categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_code)
 
         #drugs.append(drug)
         drugs[primary] = drug

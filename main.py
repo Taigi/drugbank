@@ -15,13 +15,15 @@ if __name__ == '__main__':
     # sampleFirstNdrugsFromXml(4, path, namen)
 
     #filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
-    #filename = '/root/PycharmProjects/drugbank/sampleN.xml'
-    filename = '/Volumes/Local/Users/humberto/projects/drugbank/drugbank_short.xml'
+    filename = '/root/PycharmProjects/drugbank/sampleN.xml'
+    #filename = '/Volumes/Local/Users/humberto/projects/drugbank/drugbank_short.xml'
     drugs = mapDrugBankFromFile(filename)
+    for drug in drugs.values():
+        drug.printout()
     print len(drugs)
     #for key, value in drugs.iteritems():
     #     value.printout()
-    d = levenshtein_dist(drugs)
-    print d
+    #d = levenshtein_dist(drugs)
+    #print d
 
 
