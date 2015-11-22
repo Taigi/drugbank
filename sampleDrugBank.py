@@ -30,7 +30,7 @@ def sampleFirstNdrugsFromXml(n, path,name):
 
 
 # x = 3187
-# path = '/home/iva/DMKM/DrugBank/drugbank.xml'
-# name = 'sampleN.xml'
+#path = '/home/iva/DMKM/DrugBank/drugbank.xml'
+#name = 'sample300.xml'
 #sampleXlinesfromXml(x, path, name)
-#sampleFirstNdrugsFromXml(4, path, name)
+#sampleFirstNdrugsFromXml(300, path, name)

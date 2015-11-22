@@ -6,12 +6,12 @@ def buildGraphfromList(drugs):
     for drug in drugs:
         cls = drug.classification
         if cls != None:
-            dir_graph.add_node(drug.name)
+            dir_graph.add_node(drug.primary_id)
             dir_graph.add_node(cls.direct_parent)
-            dir_graph.add_edge(cls.direct_parent,drug.name)
+            dir_graph.add_edge(cls.direct_parent,drug.primary_id)
             dir_graph.add_node(cls.superclass)
             dir_graph.add_node(cls.subclass)
-            dir_graph.add_edge(cls.superclass,drug.name)
+            dir_graph.add_edge(cls.superclass,drug.primary_id)
             dir_graph.add_edge(drug.name,cls.subclass)
     return dir_graph
 
