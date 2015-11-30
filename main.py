@@ -3,7 +3,7 @@ __author__ = 'root'
 from drugBankAcessor_ET import  mapDrugBankFromFile
 from sampleDrugBank import sampleFirstNdrugsFromXml, sampleXlinesfromXml
 from drugBankDistance import levenshtein_dist
-from ClassificationGraph import buildClassificationGraphfromList, calculateDistMatrix, buildClassificationWeightedGraphfromList, calculateWeightedDistMatrix
+from ClassificationGraph import *
 import numpy
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -39,6 +39,12 @@ if __name__ == '__main__':
     # wght_matrix = calculateWeightedDistMatrix(weighted_graph, drugs.keys())
     # print(wght_matrix)
 
+    # print 'building atc graph'
+    # graph = buildATCGraphfromList(drugs.values())
+    # test = nx.shortest_path_length(graph, 'A','A01')
+    # print 'building matrix distance'
+    # matrix = calculateDistMatrix(graph, drugs.keys())
+    # print(matrix)
 
     #for key, value in drugs.iteritems():
     #     value.printout()
@@ -46,3 +52,8 @@ if __name__ == '__main__':
     #print d
 
 
+    # nx.draw_networkx(graph, arrows=False, with_labels=False)
+    # G=nx.dodecahedral_graph()
+    # nx.draw(G)
+    # nx.draw(G,pos=nx.spring_layout(G))
+    # plt.show()
