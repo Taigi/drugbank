@@ -19,11 +19,11 @@ class Drug:
         self.molecular_formula = ''
         self.pathways_drugs = []
         self.pathways_enzymes = []
-        self.atc_code = ''
+        self.atc_codes = []
 
     def __init__(self, primary_id, other_ids, name, description, indication,
                  pharmacodynamics, classification, synonyms, international_brands,
-                 categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_code):
+                 categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_codes):
         self.primary_id = primary_id
         self.other_ids = other_ids
         self.name = name
@@ -39,7 +39,7 @@ class Drug:
         self.molecular_formula = molecular_formula
         self.pathways_drugs = pathways_drugs
         self.pathways_enzymes = pathways_enzymes
-        self.atc_code = atc_code
+        self.atc_codes = atc_codes
 
 
     def addClassificaion(self, classification):
@@ -70,5 +70,7 @@ class Drug:
         for pt in self.pathways_drugs: print '\t> '+ pt
         print 'Pathways enzymes: '
         for ept in self.pathways_enzymes: print '\t> '+ ept
-        print 'ATC code: ' + self.atc_code
+        # print 'ATC code: ' + self.atc_code
+        print 'ATC codes: '
+        for cd in self.atc_codes: print '\t> '+ cd
         print '\n----------------\n'

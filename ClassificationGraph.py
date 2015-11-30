@@ -48,10 +48,11 @@ def calculateDistMatrix(graph, drugids):
     graph_distance = numpy.zeros(shape=(n,n))
 
     sortedids = sorted(drugids)
+    dict_sortedids = dict(enumerate(sortedids))
     for i in xrange(n):
         for j in xrange(i+1,n):
             try:
-                shortest_path = nx.shortest_path_length(graph, sortedids[i], sortedids[j])
+                shortest_path = nx.dijkstra_path_length(graph, dict_sortedids[i], dict_sortedids[j])
             except nx.NetworkXNoPath:
                 shortest_path = -1
             except nx.NetworkXError:
@@ -82,15 +83,18 @@ def buildClassificationWeightedGraphfromList(drugs):
             graph.add_node(drug.primary_id)
             graph.add_edge(cls.direct_parent, drug.primary_id)
     return graph
+
+
 def calculateWeightedDistMatrix(graph, drugids):
     n = len(drugids)
     graph_distance = numpy.zeros(shape=(n,n))
 
     sortedids = sorted(drugids)
+    dict_sortedids = dict(enumerate(sortedids))
     for i in xrange(n):
         for j in xrange(i+1,n):
             try:
-                shortest_path = nx.dijkstra_path_length(graph, sortedids[i], sortedids[j])
+                shortest_path = nx.dijkstra_path_length(graph, dict_sortedids[i], dict_sortedids[j])
             except nx.NetworkXNoPath:
                 shortest_path = -1
             except nx.NetworkXError:

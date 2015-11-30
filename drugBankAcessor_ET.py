@@ -64,6 +64,8 @@ def mapDrugBankFromFile(filename):
                 kingdom = ''
             if superclass == None:
                 superclass = ''
+            if class_type == None:
+                class_type = ''
             if subclass == None:
                 subclass = ''
             classification =  Classification(class_description, direct_parent, kingdom, superclass,
@@ -119,14 +121,22 @@ def mapDrugBankFromFile(filename):
                         #uniprotid = enzymetag.find('drugbank:uniprot-id', ns).text
                         pathways_enzymes.append(uniprot.text)
 
-        atc_code = ''
-        atccode = drugtag.find('drugbank:atc-codes/drugbank:atc-code', ns)
-        if atccode != None:
+        # atc_code = ''
+        # atccode = drugtag.find('drugbank:atc-codes/drugbank:atc-code', ns)
+        # if atccode != None:
+        #     atc_code = atccode.attrib["code"]
+
+        atc_codes = []
+        atccodes = drugtag.find('drugbank:atc-codes', ns)
+        for atccode in atccodes:
+            #mm = atccode.find('drugbank:atc-code', ns)
             atc_code = atccode.attrib["code"]
+            if atc_code!=None:
+                atc_codes.append(atc_code)
 
         drug = Drug(primary, other_ids, name, description, indication, pharmacodynamics,
                     classification, synonyms, international_brands,
-                    categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_code)
+                    categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_codes)
 
         #drugs.append(drug)
         drugs[primary] = drug
