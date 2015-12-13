@@ -120,34 +120,35 @@ def buildATCGraphfromList(drugs):
     return graph
 
 
-    def buildATCWeightedGraphfromList(drugs,  weights=[1,10,20,25,50]):
-        graph = nx.Graph()
-        for drug in drugs:
-            codes = drug.atc_codes
-            if codes != []:
-                for code in codes:
-                    first = code[0:1]
-                    second = code[0:3]
-                    third = code[0:4]
-                    fourth =code[0:5]
-                    fifth = code
+def buildATCWeightedGraphfromList(drugs, weights=[1,10,20,25,50]):
+    graph = nx.Graph()
+    for drug in drugs:
+        codes = drug.atc_codes
+        if codes != []:
+            for code in codes:
+                first = code[0:1]
+                second = code[0:3]
+                third = code[0:4]
+                fourth =code[0:5]
+                fifth = code
 
-                    graph.add_node(fifth)
-                    graph.add_node(fourth)
-                    graph.add_edge(fifth, fourth, weight=weights[4])
+                graph.add_node(fifth)
+                graph.add_node(fourth)
+                graph.add_edge(fifth, fourth, weight=weights[4])
 
-                    graph.add_node(third)
-                    graph.add_edge(fourth, fifth, weight=weights[3])
+                graph.add_node(third)
+                graph.add_edge(fourth, fifth, weight=weights[3])
 
-                    graph.add_node(second)
-                    graph.add_edge(third, second, weight=weights[2])
+                graph.add_node(second)
+                graph.add_edge(third, second, weight=weights[2])
 
-                    graph.add_node(first)
-                    graph.add_edge(second, first, weight=weights[1])
+                graph.add_node(first)
+                graph.add_edge(second, first, weight=weights[1])
 
-                    graph.add_node(drug.primary_id)
-                    graph.add_edge(first, drug.primary_id,  weight=weights[0])
-        return graph
+                graph.add_node(drug.primary_id)
+                graph.add_edge(first, drug.primary_id,  weight=weights[0])
+    return graph
+
 
     #nx.draw_networkx(graph, arrows=True, with_labels=True)
     # G=nx.dodecahedral_graph()
