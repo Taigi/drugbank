@@ -18,9 +18,11 @@ if __name__ == '__main__':
     # namen = 'sampleN.xml'
     # sampleFirstNdrugsFromXml(4, path, namen)
 
-    #filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
-    filename = '/root/PycharmProjects/drugbank/sample300.xml'
+    filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
+    # filename = '/root/PycharmProjects/drugbank/sample300.xml'
     #filename = '/Volumes/Local/Users/humberto/projects/drugbank/drugbank_short.xml'
+
+
     drugs = mapDrugBankFromFile(filename)
     # for drug in drugs.values():
     #     drug.printout()
@@ -31,7 +33,11 @@ if __name__ == '__main__':
     # graph = buildClassificationGraphfromList(drugs.values())
     # print 'building matrix distance'
     # matrix = calculateDistMatrix(graph, drugs.keys())
-    # print(matrix)
+    # numpy.save('dm_uw_classification.npy',matrix)
+    # matrix = numpy.load('dm_uw_classification.npy')
+    # # print(matrix)
+    # print(matrix[0])
+    # # print(max(matrix))
 
     # print 'building weighted graph'
     # weighted_graph = buildClassificationWeightedGraphfromList(drugs.values())
@@ -41,10 +47,14 @@ if __name__ == '__main__':
 
     # print 'building atc graph'
     # graph = buildATCGraphfromList(drugs.values())
+
     # test = nx.shortest_path_length(graph, 'A','A01')
     # print 'building matrix distance'
-    # matrix = calculateDistMatrix(graph, drugs.keys())
-    # print(matrix)
+    # matrix_atc = calculateDistMatrix(graph, drugs.keys())
+    # numpy.save('dm_uw_atc.npy',matrix_atc)
+    # matrix_atc = numpy.load('dm_uw_atc.npy')
+    # print(matrix_atc)
+
 
     #for key, value in drugs.iteritems():
     #     value.printout()
@@ -52,8 +62,5 @@ if __name__ == '__main__':
     #print d
 
 
-    # nx.draw_networkx(graph, arrows=False, with_labels=False)
-    # G=nx.dodecahedral_graph()
-    # nx.draw(G)
-    # nx.draw(G,pos=nx.spring_layout(G))
+    # nx.draw(graph)#, with_labels=False)
     # plt.show()
