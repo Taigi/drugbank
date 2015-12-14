@@ -134,7 +134,8 @@ def mapDrugBankFromFile(filename):
             if atc_code!=None:
                 atc_codes.append(atc_code)
 
-        if(description!='' and pharmacodynamics != '' and classification != [] and atc_codes !=[]):
+        if(description!='' and pharmacodynamics != '' and classification != None and atc_codes !=[]):
+
             drug = Drug(primary, other_ids, name, description, indication, pharmacodynamics,
                         classification, synonyms, international_brands,
                         categories, sequences, molecular_weight, molecular_formula, pathways_drugs, pathways_enzymes, atc_codes)
