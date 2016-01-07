@@ -27,6 +27,7 @@ def cosine(vector1, vector2):
     """
     return float(np.dot(vector1,vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2)))
 
+# Move to accessor
 def drug_term_dictionary(drugs, kys, attr="description"):
     token_list = [None] * len(kys)
     n_non_empty_drugs = 0
@@ -85,3 +86,21 @@ def upper_tri_as_list(matr):
         for j in range(i+1, n):
             tri_list.append(matr[i,j])
     return tri_list
+
+# Reads the drugbank ids given an index
+# Move to accessor
+def label_idx(labels, nclust):
+    ret = dict()
+    for c in range(nclust):
+        l = []
+        for i in range(len(labels)):
+            if labels[i] == c:
+                l.append(i)
+        ret[c] = l
+    return ret
+
+def idx_to_id(idx, ids_dict):
+    ret = []
+    for i in idx:
+        ret.append(ids_dict[i])
+    return ret
