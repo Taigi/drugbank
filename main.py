@@ -2,7 +2,6 @@ __author__ = 'root'
 
 from drugBankAcessor_ET import  mapDrugBankFromFile
 from sampleDrugBank import sampleFirstNdrugsFromXml, sampleXlinesfromXml
-from drugBankDistance import levenshtein_dist
 from ClassificationGraph import *
 import numpy
 import networkx as nx
@@ -18,24 +17,29 @@ if __name__ == '__main__':
     # namen = 'sampleN.xml'
     # sampleFirstNdrugsFromXml(4, path, namen)
 
-    filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
+    # filename = '/home/iva/DMKM/DrugBank/drugbank_old.xml'
+     filename = '/home/iva/DMKM/DrugBank/drugbank.xml'
     # filename = '/root/PycharmProjects/drugbank/sample300.xml'
     #filename = '/Volumes/Local/Users/humberto/projects/drugbank/drugbank_short.xml'
 
 
-    drugs = mapDrugBankFromFile(filename)
-    # for drug in drugs.values():
-    #     drug.printout()
-    print len(drugs)
-
+    # drugs = mapDrugBankFromFile(filename)
+    # # for drug in drugs.values():
+    # #     drug.printout()
+    # print len(drugs)
 
     # print 'building graph'
     # graph = buildClassificationGraphfromList(drugs.values())
+
+
+
     # print 'building matrix distance'
     # matrix = calculateDistMatrix(graph, drugs.keys())
-    # numpy.save('dm_uw_classification.npy',matrix)
     # matrix = numpy.load('dm_uw_classification.npy')
-    # # print(matrix)
+    # from convertDistToSim import leakcock_chodorow_measure
+    # matrix = leakcock_chodorow_measure(matrix)
+    # print(matrix)
+    # numpy.save('sim_mat_uw_classification.npy',matrix)
     # print(matrix[0])
     # # print(max(matrix))
 
@@ -55,6 +59,26 @@ if __name__ == '__main__':
     # matrix_atc = numpy.load('dm_uw_atc.npy')
     # print(matrix_atc)
 
+    # from sklearn.cluster import spectral_clustering
+    # matrix = numpy.load('sim_mat_uw_classification.npy')
+    # print(matrix_atc)
+
+    # sortedids = sorted(drugs.keys())
+    # dict_sortedids = dict(enumerate(sortedids))
+    # labels = spectral_clustering(matrix, n_clusters=4)
+    # cl0 = []
+    # for i, lab in enumerate(labels):
+    #     if lab == 0:
+    #        cl0.append(dict_sortedids[i])
+    # print(cl0)
+    # pos=nx.spring_layout(graph)
+    # print(graph.has_node('DB00732'))
+    # # nx.draw_networkx_nodes(graph,pos,
+    #                    nodelist=cl0,
+    #                    node_color='r',
+    #                    node_size=20,
+    #                alpha=0.8)
+    # plt.show()
 
     #for key, value in drugs.iteritems():
     #     value.printout()

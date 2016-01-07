@@ -42,6 +42,7 @@ def calculateDistMatrix(graph, drugids):
             except nx.NetworkXError:
                 shortest_path = -1
             graph_distance[i,j] = shortest_path
+            graph_distance[j,i] = shortest_path
         print i
     return graph_distance
 
@@ -85,6 +86,7 @@ def calculateWeightedDistMatrix(graph, drugids):
             except nx.NetworkXError:
                 shortest_path = -1
             graph_distance[i,j] = shortest_path
+            graph_distance[j,i] = shortest_path
         print i
     return graph_distance
 
