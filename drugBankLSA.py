@@ -29,17 +29,24 @@ def cosine(vector1, vector2):
 
 # Move to accessor
 def drug_term_dictionary(drugs, kys, attr="description"):
+    if type(attr) is not list:
+        attrs = [attr]
+    else:
+        attrs = attr
+
     token_list = [None] * len(kys)
     n_non_empty_drugs = 0
     regex = re.compile('[%s]' % re.escape(string.punctuation))
     for i in kys.keys():
         # Add more text processing: remove numbers, etc
-        text = getattr(drugs[kys[i]], attr)
+        text = ''
+        for a in attrs:
+            text = text + ' ' + getattr(drugs[kys[i]], a)
         text = regex.sub('', text)
         if len(text) > 0:
             n_non_empty_drugs += 1
             token_list[i] = text.lower()#.translate(string.punctuation)
-    print(len(drugs) - n_non_empty_drugs, " drugs found with empty " + attr + " field")
+    print(len(drugs) - n_non_empty_drugs, " drugs found with empty fields")
     return token_list
 
 def drug_term_dictionary2(drugs, attr="description"):
