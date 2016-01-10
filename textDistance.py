@@ -35,11 +35,11 @@ tfs_scale = scale(tfs_variable.A, axis=0, with_std=False)
 print("Num vars: ", len(np.mean(tfs_scale, axis=0)))
 print('Total variance: ', np.var(tfs_variable.A,axis=0).sum())
 
-svd = TruncatedSVD(n_components=500, random_state=42)
+svd = TruncatedSVD(n_components=100, random_state=42)
 normalizer = Normalizer(copy=False)
 lsa = make_pipeline(svd, normalizer)
 tfs_red = lsa.fit_transform(tfs_scale)
-#numpy.save('./data/tf-idf_reduced500c.npy',tfs_red)
+#numpy.save('./data/tf-idf_reduced100c.npy',tfs_red)
 
 print('Reduced X shape: ', tfs_red.shape)
 #print('Explained variance' , svd.explained_variance_ratio_.cumsum())
@@ -51,11 +51,11 @@ plt.axis('tight')
 plt.xlabel('num components')
 plt.ylabel('explained variance')
 #plt.show()
-plt.savefig('./plots/LSAnum_comp.png')
+#plt.savefig('./plots/LSAnum_comp.png')
 
 # Distance matrix
 dist = squareform(pdist(tfs_scale, 'euclidean'))
 dist_red = squareform(pdist(tfs_red, 'euclidean'))
 #numpy.save('./data/dist_text.npy',dist)
-#numpy.save('./data/dist_text_reduced500c.npy',dist_red)
+#numpy.save('./data/dist_text_reduced100c.npy',dist_red)
 

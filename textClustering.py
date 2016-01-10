@@ -14,21 +14,23 @@ print (len(drugs))
 ids = sorted(drugs.keys())
 ids_dic = dict(enumerate(ids))
 
-mat = numpy.load('./data/tf-idf_reduced500c.npy')
+ncomp = '200'
+mat = numpy.load('./data/tf-idf_reduced'+ncomp+'c.npy')
 dist = numpy.load('./data/dist_text.npy')
-dist_red = numpy.load('./data/dist_text_reduced500c.npy')
+dist_red = numpy.load('./data/dist_text_reduced'+ncomp+'c.npy')
 
 #
-hca = AgglomerativeClustering(linkage="ward",affinity="euclidean", connectivity=None, n_clusters=25)
+hca = AgglomerativeClustering(linkage="ward",affinity="euclidean", connectivity=None, n_clusters=14)
 hca.fit(mat)
 nclust = max(hca.labels_)+1
 
 # Print the clusters
 clusters_idx = label_idx(hca.labels_, nclust)
-for l in clusters_idx.values():
-     print(l)
-     print(idx_to_id(l, ids_dic))
+clusters_dbid = dict()
+for l in clusters_idx.keys():
+     clusters_dbid[l] = idx_to_id(clusters_idx[l], ids_dic)
 print('Number of clusters: ', max(hca.labels_)+1)
+print('Clusters:\n ', clusters_dbid)
 
 
 ############ Visual evaluation
@@ -74,6 +76,7 @@ plt.show()
 # Plot dist numero de elementos
 # Medioides
 # Diametro / dist clusters
+
 # junta martes 19 en la UB despues de las 14
 # Miercoles o jueves en UPC a cualquier hora
 
