@@ -3,7 +3,7 @@ __author__ = 'humberto'
 from drugBankAcessor_ET import mapDrugBankFromFile
 import nltk
 import matplotlib.pyplot as plt
-from textmining import TermDocumentMatrix, simple_tokenize_remove_stopwords
+# from textmining import TermDocumentMatrix, simple_tokenize_remove_stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.spatial.distance import *
 from sklearn.decomposition import PCA
