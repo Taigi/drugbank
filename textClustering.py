@@ -14,7 +14,7 @@ print (len(drugs))
 ids = sorted(drugs.keys())
 ids_dic = dict(enumerate(ids))
 
-ncomp = '200'
+ncomp = '500'
 mat = numpy.load('./data/tf-idf_reduced'+ncomp+'c.npy')
 dist = numpy.load('./data/dist_text.npy')
 dist_red = numpy.load('./data/dist_text_reduced'+ncomp+'c.npy')
@@ -34,16 +34,34 @@ print('Clusters:\n ', clusters_dbid)
 
 
 ############ Visual evaluation
-fig = plt.figure()
-plt.imshow(dist, interpolation='nearest', vmin=0, vmax=1.4)
-plt.colorbar().set_label('Distance')
-plt.show()
-#plt.savefig('./plots/LSAnum_comp.png')
+maxdist = 0
+if dist.max() >= dist_red.max():
+    maxdist = dist.max()
+else:
+    maxdist = dist_red.max()
+print('Max distance: ', maxdist)
+
+maxdist = 1.5
 
 fig = plt.figure()
-plt.imshow(dist_red, interpolation='nearest', vmin=0, vmax=1.4)
+plt.tick_params(
+    axis='both',
+    labelleft='off',
+    labelbottom='off')
+plt.imshow(dist, interpolation='nearest', vmin=0, vmax=maxdist)
+plt.colorbar().set_label('Distance')
+#plt.show()
+plt.savefig('./plots/dist_mat.png')
+
+fig = plt.figure()
+plt.tick_params(
+    axis='both',
+    labelleft='off',
+    labelbottom='off')
+plt.imshow(dist_red, interpolation='nearest', vmin=0, vmax=maxdist)
 plt.colorbar()
-plt.show()
+#plt.show()
+plt.savefig('./plots/dist_red'+ ncomp+'c.png')
 
 # Order the distance matrices according to clusters
 clusters_idx_ordered = list()
@@ -53,16 +71,26 @@ for i in range(nclust):
 print((dist_red[:, clusters_idx_ordered][clusters_idx_ordered]/dist_red[:, clusters_idx_ordered][clusters_idx_ordered].max()).max())
 
 fig = plt.figure()
+plt.tick_params(
+    axis='both',
+    labelleft='off',
+    labelbottom='off')
 plt.imshow(dist_red[:, clusters_idx_ordered][clusters_idx_ordered],
-           interpolation='nearest', vmin=0, vmax=1.4)
+           interpolation='nearest', vmin=0, vmax=maxdist)
 plt.colorbar().set_label('Distance')
-plt.show()
+plt.savefig('./plots/dist_red_ord'+ ncomp+'c.png')
+#plt.show()
 
 fig = plt.figure()
+plt.tick_params(
+    axis='both',
+    labelleft='off',
+    labelbottom='off')
 plt.imshow(dist[:, clusters_idx_ordered][clusters_idx_ordered],
-           interpolation='nearest', vmin=0, vmax=1.4)
+           interpolation='nearest', vmin=0, vmax=maxdist)
 plt.colorbar().set_label('Distance')
-plt.show()
+plt.savefig('./plots/dist_ord'+ ncomp+'c.png')
+#plt.show()
 
 
 
